@@ -1,0 +1,6 @@
+numpy>=2.0,<3
+pandas>=2.2,<4
+scikit-learn>=1.9.1,<2
+requests>=2.32,<3
+beautifulsoup4>=4.12,<5
+

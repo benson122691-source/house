@@ -1,0 +1,196 @@
+{
+  "city": "新北市",
+  "source_files": {
+    "rent": "New Taipei rental real-price records",
+    "sale": "New Taipei sale real-price records"
+  },
+  "scikit_learn": "1.9.1",
+  "split": "按交易日期排序，前80%訓練、最新20%測試；每個模型共用測試集",
+  "cleaning": "去重；篩掉無效面積與目標；目標兩端各0.5%極端值；僅保留有交易日期樣本",
+  "rent": {
+    "kind": "rent",
+    "source_rows": 44852,
+    "clean_rows": 43937,
+    "train_rows": 35149,
+    "test_rows": 8788,
+    "test_from": "2026-05-12",
+    "test_to": "2026-07-20",
+    "target_unit": "元/月/坪",
+    "features": [
+      "area_ping",
+      "building_age",
+      "floor_level",
+      "total_floors",
+      "floor_ratio",
+      "bedrooms",
+      "living_rooms",
+      "bathrooms",
+      "trade_year",
+      "trade_month",
+      "district",
+      "property_type",
+      "purpose",
+      "room_type",
+      "management",
+      "furnished",
+      "elevator"
+    ],
+    "models": [
+      {
+        "model": "Median baseline",
+        "mae": 361.555,
+        "rmse": 569.239
+      },
+      {
+        "model": "Ridge",
+        "mae": 224.967,
+        "rmse": 363.288
+      },
+      {
+        "model": "Random forest",
+        "mae": 139.669,
+        "rmse": 220.254
+      }
+    ],
+    "best_model": "Random forest",
+    "random_forest_demo_prediction_unit": 889.4,
+    "demo_features": {
+      "area_ping": 30.0,
+      "building_age": 15.0,
+      "floor_level": 7.0,
+      "total_floors": 14.0,
+      "floor_ratio": 0.5,
+      "bedrooms": 3.0,
+      "living_rooms": 2.0,
+      "bathrooms": 2.0,
+      "trade_year": 2026.0,
+      "trade_month": 10.0,
+      "district": "板橋區",
+      "property_type": "住宅大樓(11層含以上有電梯)",
+      "purpose": "住家用",
+      "room_type": "整層住家",
+      "management": "有",
+      "furnished": "有",
+      "elevator": "有"
+    }
+  },
+  "sale": {
+    "kind": "sale",
+    "source_rows": 50065,
+    "clean_rows": 41682,
+    "train_rows": 33345,
+    "test_rows": 8337,
+    "test_from": "2026-02-03",
+    "test_to": "2026-08-13",
+    "target_unit": "萬元/坪",
+    "features": [
+      "area_ping",
+      "building_age",
+      "floor_level",
+      "total_floors",
+      "floor_ratio",
+      "bedrooms",
+      "living_rooms",
+      "bathrooms",
+      "trade_year",
+      "trade_month",
+      "parking_price_wan",
+      "district",
+      "property_type",
+      "purpose",
+      "management",
+      "elevator",
+      "has_parking"
+    ],
+    "models": [
+      {
+        "model": "Median baseline",
+        "mae": 14.162,
+        "rmse": 17.529
+      },
+      {
+        "model": "Ridge",
+        "mae": 8.76,
+        "rmse": 11.792
+      },
+      {
+        "model": "Random forest",
+        "mae": 7.165,
+        "rmse": 10.065
+      }
+    ],
+    "best_model": "Random forest",
+    "random_forest_demo_prediction_unit": 59.61,
+    "demo_features": {
+      "area_ping": 30.0,
+      "building_age": 15.0,
+      "floor_level": 7.0,
+      "total_floors": 14.0,
+      "floor_ratio": 0.5,
+      "bedrooms": 3.0,
+      "living_rooms": 2.0,
+      "bathrooms": 2.0,
+      "trade_year": 2026.0,
+      "trade_month": 10.0,
+      "parking_price_wan": 0.0,
+      "district": "板橋區",
+      "property_type": "住宅大樓(11層含以上有電梯)",
+      "purpose": "住家用",
+      "management": "有",
+      "elevator": "有",
+      "has_parking": "無車位/未記載"
+    }
+  },
+  "comparison": {
+    "demo_property": "板橋區假設大樓，30坪、屋齡15年、7/14樓、3房2廳2衛、有管理/電梯、無車位、無貸款",
+    "model_outputs": {
+      "sale_price_wan": 1788.3,
+      "monthly_rent_ntd": 26682,
+      "sale_unit_wan_per_ping": 59.61,
+      "rent_unit_ntd_per_ping": 889.4
+    },
+    "assumptions": {
+      "area_ping": 30,
+      "sale_tax_now_wan": 45.0,
+      "sale_tax_year10_wan": 60.0,
+      "sale_cost_rate": 0.04,
+      "house_and_land_tax_per_year_wan": 4.0,
+      "rental_income_tax_per_year_wan": 2.0,
+      "management_and_maintenance_per_year_wan": 6.0,
+      "vacancy_rate": 0.05,
+      "loan_balance_wan": 0.0,
+      "investment_rate": 0.03,
+      "years": 10,
+      "home_price_growth_scenarios": [
+        0.0,
+        0.02,
+        0.04
+      ],
+      "assumption_note": "示範輸入，不是法定稅額估算；正式試算須改成個別稅單、貸款與稅務估算。"
+    },
+    "annual_net_rent_wan": 18.42,
+    "rent_fv_wan": 211.1,
+    "sell_now_A_wan": 2246.7,
+    "cases": [
+      {
+        "growth_rate": 0.0,
+        "sell_now_A_wan": 2246.7,
+        "rent_hold_B_wan": 1867.9,
+        "difference_B_minus_A_wan": -378.8
+      },
+      {
+        "growth_rate": 0.02,
+        "sell_now_A_wan": 2246.7,
+        "rent_hold_B_wan": 2243.9,
+        "difference_B_minus_A_wan": -2.9
+      },
+      {
+        "growth_rate": 0.04,
+        "sell_now_A_wan": 2246.7,
+        "rent_hold_B_wan": 2692.4,
+        "difference_B_minus_A_wan": 445.7
+      }
+    ],
+    "break_even_growth_rate": 0.0201
+  }
+}

@@ -1,0 +1,10 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.DS_Store
+Thumbs.db
+data/raw/*.csv
+output/crawled_listing.json
+
